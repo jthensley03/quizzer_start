@@ -44,18 +44,21 @@ export const QuizList = ({
                     </Button>
                 </>
             )}
-            {quizzes.map((quiz: Quiz) => {
-                if (displayId === quiz.id) {
-                    return (
-                        <QuizView
-                            key={quiz.id}
-                            quiz={quiz}
-                            editQuiz={editQuiz}
-                            deleteQuiz={deleteQuiz}
-                            resetView={resetQuizView}
-                        ></QuizView>
-                    );
-                }
+            {
+                quizzes.map((quiz: Quiz) => {
+                    if (displayId === quiz.id) {
+                        return (
+                            <QuizView
+                                key={quiz.id}
+                                quiz={quiz}
+                                editQuiz={editQuiz}
+                                deleteQuiz={deleteQuiz}
+                                resetView={resetQuizView}
+                            ></QuizView>
+                        );
+                    } else {
+                        return null;
+                    }  
             })}
         </div>
     );

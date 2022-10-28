@@ -42,7 +42,6 @@ export const QuizEdit = ({
     };
 
     const swapQuestion = (idx1: number, idx2: number) => {
-        console.log("inside swap")
         const x1Question = {...newQuiz.questionList[idx1]};
         const x2Question = {...newQuiz.questionList[idx2]};
         newQuiz.questionList.splice(idx1, 1, x2Question)

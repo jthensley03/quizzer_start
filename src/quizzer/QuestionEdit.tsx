@@ -37,13 +37,16 @@ export const QuestionEdit = ({
         });
     };
 
-    const switchMulti = () => {
+    const switchType = (question: Question) => {
         b(0);
+        const newQuestion = {...question}
+        if (newQuestion.type === "multiple_choice_question") {
+            newQuestion.type = "short_answer_question";
+        } else {
+            newQuestion.type = "multiple_choice_question";
+        }
         editQuestion(question.id, {
-            ...question,
-            type: "multiple_choice_question",
-            expected: "Example Answer",
-            options: Array(3).fill("Example Answer")
+            ...newQuestion,
         });
     };
 
@@ -108,6 +111,7 @@ export const QuestionEdit = ({
                                 value={question.points}
                                 type="number"
                                 onChange={handlePoints}
+                                data-testid={"num_points"}
                             ></Form.Control>
                         </Form.Group>
                         <h4>pt{question.points !== 1 ? "s" : ""}</h4>
@@ -121,7 +125,7 @@ export const QuestionEdit = ({
                                 <Form.Select
                                     className="type_dropdown"
                                     value={question.type}
-                                    onChange={() => switchMulti()}
+                                    onChange={() => switchType(question)}
                                 >
                                     <option
                                         data-testid={
@@ -150,6 +154,7 @@ export const QuestionEdit = ({
                                             value={question.options.length}
                                             type="number"
                                             onChange={handleNumOptions}
+                                            data-testid={"num_choices"}
                                         ></Form.Control>
                                     </Form.Group>
                                 </>
@@ -169,6 +174,7 @@ export const QuestionEdit = ({
                                                 expected: e.target.value
                                             });
                                         }}
+                                        data-testid="shortExpectedAnswer"
                                     ></Form.Control>
                                 </Form.Group>
                             )}
@@ -182,6 +188,7 @@ export const QuestionEdit = ({
                                                 className="radio_question_box"
                                             >
                                                 <Form.Check
+                                                    data-testid="multiple_choice_option_edit"
                                                     type="radio"
                                                     name={
                                                         "questionChoice" + index
