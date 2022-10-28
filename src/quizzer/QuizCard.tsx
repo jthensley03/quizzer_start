@@ -6,7 +6,7 @@ import { Question } from "../interfaces/question";
 
 interface quizCardProps {
     quiz: Quiz,
-    handleClick: (quizId: number) => void
+    handleClick: (id: number) => void
 }
 
 export const QuizCard = ({
